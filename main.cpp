@@ -81,7 +81,19 @@ int main() {
     while (runLoop) {
         for (auto&& [key, rawGameController] : rawGameControllers)
         {
+            // Example devices...
+            // - Switch Pro Controller (Bluetooth)
+            // - - Works as expected.
+            // - Xbox Series S/X Controller (Bluetooth)
+            // - - Recognised as a device, but GetCurrentReading does not seem to obtain a reading.
+            // - Xbox Series S/X Controller (USB)
+            // - - Recognised as a device, but GetCurrentReading does not seem to obtain a reading.
+            // - Xbox One Elite Controller (USB)
+            // - - Recognised as a device, but GetCurrentReading does not seem to obtain a reading.
+            // - Xbox One Controller (USB)
+            // - - Recognised as a device, but GetCurrentReading does not seem to obtain a reading.
             if (gamepads.count(key) > 0) {
+                cout << "reading as gamepad" << endl;
                 auto gamepad = gamepads.at(key);
                 auto oldReading = oldGamepadReading[key];
                 auto reading = gamepad.GetCurrentReading();
@@ -148,6 +160,18 @@ int main() {
 
                 oldGamepadReading[key] = reading;
             } else {
+                // Example devices...
+                // - DualSense via USB (Not supported via Bluetooth)
+                // - - Works as expected.
+                // - DualSense via Bluetooth
+                // - - Device not supported.
+                // - - See https://www.playstation.com/en-au/support/hardware/pair-dualsense-controller-bluetooth/
+                // - Switch Pro Controller via USB
+                // - - Observed that when connected via USB, the OS recognises
+                // - - the gamepad as a RawGameController, but pressing any
+                // - - button causes the device to attempt to search for a system to
+                // - - connect to via Bluetooth.
+
                 // Read as RawGameController
                 rawGameController.GetCurrentReading(buttonLookup[key], switchLookup[key], axisLookup[key]);
 
