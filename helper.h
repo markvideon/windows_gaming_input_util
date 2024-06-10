@@ -16,9 +16,13 @@ using namespace Foundation;
 
 class Helper {
 public:
-    void onRawGameControllerAdded(IInspectable const &_, RawGameController const gamepad);
+    void onRawGameControllerAdded(IInspectable const &_, RawGameController const rawGameController);
+    void onGamepadAdded(IInspectable const &_, Gamepad const rawGameController);
     void onRawGameControllerRemoved(IInspectable const &_, RawGameController const gamepad);
-    map<string, RawGameController> devices;
+    void onGamepadRemoved(IInspectable const &_, Gamepad const gamepad);
+
+    map<string, Gamepad> gamepads;
+    map<string, RawGameController> rawGameControllers;
 };
 
 #endif //WINDOWS_GAMING_INPUT_UTIL_HELPER_H
