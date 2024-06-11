@@ -161,7 +161,7 @@ int main() {
                 oldGamepadReading[key] = reading;
             } else {
                 // Example devices...
-                // - DualSense via USB (Not supported via Bluetooth)
+                // - DualSense via USB
                 // - - Works as expected.
                 // - DualSense via Bluetooth
                 // - - Device not supported.
